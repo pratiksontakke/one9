@@ -51,19 +51,40 @@ public class GlobalException {
         return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CategorieException.class)
+    public ResponseEntity<MyErrorDetails> loginException(CategorieException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(EmployeeException.class)
+    public ResponseEntity<MyErrorDetails> loginException(EmployeeException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(OrderException.class)
+    public ResponseEntity<MyErrorDetails> loginException(OrderException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(ProductException.class)
+    public ResponseEntity<MyErrorDetails> loginException(ProductException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(ShipperException.class)
+    public ResponseEntity<MyErrorDetails> loginException(ShipperException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
-
-
-
-
-
-
-
-
-
+    @ExceptionHandler(SupplierException.class)
+    public ResponseEntity<MyErrorDetails> loginException(SupplierException ce, WebRequest req) {
+        MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+        return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+    }
 
 }
