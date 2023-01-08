@@ -2,7 +2,7 @@ package com.one9.controller;
 
 
 import com.one9.exception.CustomerException;
-import com.one9.model.Customer;
+import com.one9.model.Customers;
 import com.one9.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,15 +18,15 @@ public class CustomerController {
     @Autowired
     private CustomerService cService;
     @PostMapping("/customers")
-    public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
-        Customer savedCustomer= cService.createCustomer(customer);
-        return new ResponseEntity<Customer>(savedCustomer, HttpStatus.CREATED);
+    public ResponseEntity<Customers> saveCustomer(@Valid @RequestBody Customers customer) throws CustomerException {
+        Customers savedCustomer= cService.createCustomer(customer);
+        return new ResponseEntity<Customers>(savedCustomer, HttpStatus.CREATED);
     }
 
     @PutMapping("/customers")
-    public  ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer, @Valid @RequestParam String key ) throws CustomerException {
-        Customer updatedCustomer= cService.updateCustomer(customer, key);
-        return new ResponseEntity<Customer>(updatedCustomer,HttpStatus.ACCEPTED);
+    public  ResponseEntity<Customers> updateCustomer(@Valid @RequestBody Customers customer, @Valid @RequestParam String key ) throws CustomerException {
+        Customers updatedCustomer= cService.updateCustomer(customer, key);
+        return new ResponseEntity<Customers>(updatedCustomer,HttpStatus.ACCEPTED);
     }
 
 }

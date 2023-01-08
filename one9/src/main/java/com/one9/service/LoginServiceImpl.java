@@ -5,7 +5,7 @@ import com.one9.dao.CustomerDAO;
 import com.one9.dao.SessionDAO;
 import com.one9.exception.LoginException;
 import com.one9.model.CurrentUserSession;
-import com.one9.model.Customer;
+import com.one9.model.Customers;
 import com.one9.model.LoginDTO;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Override
 	public String logIntoAccount(LoginDTO dto)throws LoginException {
-		Customer existingCustomer= cDao.findByMobileNumber(dto.getMobileNumber());
+		Customers existingCustomer= cDao.findByMobileNumber(dto.getMobileNumber());
 		if(existingCustomer == null) {
 			throw new LoginException("Please Enter a valid mobile number");
 		}

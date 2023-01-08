@@ -2,12 +2,12 @@ package com.one9.service;
 
 
 import com.one9.exception.CustomerException;
-import com.one9.model.Customer;
+import com.one9.model.Customers;
 
 public interface CustomerService {
 
-	public Customer createCustomer(Customer customer) throws CustomerException;
+	public Customers createCustomer(Customers customer) throws CustomerException;
 	
-	public Customer updateCustomer(Customer customer,String key) throws CustomerException;
+	public Customers updateCustomer(Customers customer, String key) throws CustomerException;
 
 }

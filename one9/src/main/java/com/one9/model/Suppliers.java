@@ -1,14 +1,12 @@
 package com.one9.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,41 +19,40 @@ public class Suppliers { // SupplierID, SupplierName, ContactName, Address, City
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer SupplierID;
+    private Integer supplierID;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String SupplierName;
+    private String supplierName;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String ContactName;
+    private String address;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String Address;
+    private String city;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String City;
+    private String postalCode;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String PostalCode;
+    private String country;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String Country;
+    private Long phone;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
-    private String Phone;
+    @ManyToOne
+    @JsonIgnore
+    private Employees employee;
 
 }

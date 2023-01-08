@@ -1,6 +1,5 @@
 package com.one9.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,13 +7,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Customers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +24,17 @@ public class Customer {
     @NotNull
     @NotBlank
     @NotEmpty
-    private String customerName;
+    private String firstName;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String contactName;
+    private String lastName;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private LocalDate birthDate;
 
     @NotNull
     @NotBlank
@@ -50,9 +56,7 @@ public class Customer {
     @NotEmpty
     private String country;
 
-
-
-    /*@Size(min = 10, message = "Please enter valid mobile number")
+    @Size(min = 10, message = "Please enter valid mobile number")
     @Column(unique=true)
     private String mobileNumber;
 
@@ -60,8 +64,9 @@ public class Customer {
     private String password;
 
     @Email(message = "Enter valid email id.")
-    private String email;*/
+    private String email;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Orders> order;
 
 }
