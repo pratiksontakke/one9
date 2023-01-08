@@ -18,15 +18,41 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer customerId;
+    private Integer customerID;
 
     @NotNull
     @NotBlank
     @NotEmpty
-    private String name;
+    private String customerName;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String contactName;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String address;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String city;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String postalCode;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String country;
 
 
-    @Size(min = 10, message = "Please enter valid mobile number")
+
+    /*@Size(min = 10, message = "Please enter valid mobile number")
     @Column(unique=true)
     private String mobileNumber;
 
@@ -34,7 +60,8 @@ public class Customer {
     private String password;
 
     @Email(message = "Enter valid email id.")
-    private String email;
+    private String email;*/
+
 
 
 }
