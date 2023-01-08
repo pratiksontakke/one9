@@ -1,18 +1,19 @@
 package com.one9.service;
 
+import com.one9.exception.ProductException;
 import com.one9.model.Products;
 
 import java.util.List;
 
 public interface ProductService {
-    public Products addProduct(Products product);
+    public Products addProduct(Products product) throws ProductException;
 
-    public Products updateProducts(Products product);
+    public Products updateProducts(Products product) throws ProductException;
 
-    public Products deleteProducts(Products product);
+    public Products deleteProducts(Products product) throws ProductException;
 
-    public Products getProducts(Integer cid);
+    public Products getProduct(Integer id) throws ProductException;
 
-    public List<Products> getAllProducts();
+    public List<Products> getAllProducts() throws ProductException;
 
 }
