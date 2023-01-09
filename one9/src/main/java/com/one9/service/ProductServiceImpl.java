@@ -45,14 +45,8 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Products updateProducts(Products product, String key) throws ProductException, LoginException {
-        Optional<Products> products = pdao.findById(product.getProductID());
-        /*if(products.isPresent()) {
-            return pdao.save(product);
-        } else {
-            throw new ProductException("Product not found with id : " + product.getProductID());
-        }*/
-
         if(lSer.isLoginEmployee(key)) {
+//            Optional<Products> products = pdao.findById(product.getProductID());
             CurrentUserSession currentUserSession = sdao.findByUuid(key);
             Employees employee = edao.findByMobileNumber(currentUserSession.getUserId());
             boolean flag = false;
@@ -83,24 +77,23 @@ public class ProductServiceImpl implements ProductService{
             CurrentUserSession currentUserSession = sdao.findByUuid(key);
             Employees employee = edao.findByMobileNumber(currentUserSession.getUserId());
             boolean flag = false;
-
+            Products p1 = null;
             for (Products p : employee.getProducts()) {
                 if (Objects.equals(p.getProductID(), id)) {
+                    p1 = p;
                     pdao.deleteById(id);
                     flag = true;
                 }
             }
             if (flag) {
                 edao.save(employee);
-                return pdao.findById(id).get();
+                return p1;
             } else {
                 throw new ProductException("You can't touch this product with product id : " + id);
             }
         } else {
             throw new LoginException("Employee not login");
         }
-
-
     }
 
     @Override
