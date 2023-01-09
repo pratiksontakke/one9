@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -67,6 +68,6 @@ public class Customers {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Orders> order;
+    private List<Orders> order = new ArrayList<>();
 
 }

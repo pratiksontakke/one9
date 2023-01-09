@@ -1,7 +1,12 @@
 package com.one9.service;
 
+import com.one9.dao.CustomerDAO;
 import com.one9.dao.OrdersDAO;
+import com.one9.dao.SessionDAO;
+import com.one9.exception.LoginException;
 import com.one9.exception.OrderException;
+import com.one9.model.CurrentUserSession;
+import com.one9.model.Customers;
 import com.one9.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +20,33 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrdersDAO odao;
 
+    @Autowired
+    SessionDAO sdao;
+
+    @Autowired
+    CustomerDAO cdao;
+
+    @Autowired
+    LoginServiceImpl lSer;
+
     @Override
-    public Orders addOrder(Orders order) throws OrderException {
-        return odao.save(order);
+    public String addOrder(Orders order, String key) throws OrderException, LoginException {
+        if(lSer.isLoginCustomer(key)) {
+            CurrentUserSession currentUserSession = sdao.findByUuid(key);
+            Customers customers = cdao.findByMobileNumber(currentUserSession.getUserId());
+            customers.getOrder().add(order);
+            cdao.save(customers);
+            return "Product added successfully";
+        } else {
+            throw new LoginException("Customer not login");
+        }
     }
 
     @Override
-    public Orders deleteOrder(Integer id) throws OrderException {
+    public Orders deleteOrder(Integer id, String key) throws OrderException, LoginException {
+        if(!lSer.isLoginCustomer(key)) {
+            throw new LoginException("Customer not login");
+        }
         Optional<Orders> orders = odao.findById(id);
         if (orders.isPresent()) {
             odao.deleteById(id);
@@ -32,7 +57,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders getOrder(Integer id) throws OrderException {
+    public Orders getOrder(Integer id, String key) throws OrderException, LoginException {
+        if(!lSer.isLoginCustomer(key) || !lSer.isLoginEmployee(key)) {
+            throw new LoginException("Login first");
+        }
+
         Optional<Orders> orders = odao.findById(id);
         if (orders.isPresent()) {
             return orders.get();
@@ -42,12 +71,30 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Orders> getAllOrder() throws OrderException {
-        List<Orders> orders = odao.findAll();
-        if(orders.isEmpty()) {
-            throw new OrderException("Order list is empty");
-        } else {
+    public List<Orders> getAllOrderCustomer(String key) throws OrderException, LoginException {
+        if(lSer.isLoginCustomer(key)) {
+            CurrentUserSession currentUserSession = sdao.findByUuid(key);
+            Customers customers = cdao.findByMobileNumber(currentUserSession.getUserId());
+            List<Orders> orders = customers.getOrder();
+            if(orders.isEmpty()) {
+                throw new OrderException("Order list is empty");
+            }
             return orders;
+        } else {
+            throw new LoginException("Customer not login");
+        }
+    }
+
+    @Override
+    public List<Orders> getAllOrderEmployee(String key) throws OrderException, LoginException {
+        if(lSer.isLoginEmployee(key)) {
+            List<Orders> orders = odao.findAll();
+            if(orders.isEmpty()) {
+                throw new OrderException("Order list is empty");
+            }
+            return orders;
+        } else {
+            throw new LoginException("Employee not login");
         }
     }
 }

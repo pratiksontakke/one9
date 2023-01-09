@@ -6,8 +6,16 @@ import com.one9.model.LoginDTO;
 
 public interface LoginService {
 	
-	public String logIntoAccount(LoginDTO dto)throws LoginException;
+	public String logIntoAccountCustomer(LoginDTO dto)throws LoginException;
 
-	public String logOutFromAccount(String key)throws LoginException;
+	public String logOutFromAccountCustomer(String key)throws LoginException;
+
+	public boolean isLoginCustomer(String key) throws LoginException;
+
+	public String logIntoAccountEmployee(LoginDTO dto)throws LoginException;
+
+	public String logOutFromAccountEmployee(String key)throws LoginException;
+
+	public boolean isLoginEmployee(String key) throws LoginException;
 
 }

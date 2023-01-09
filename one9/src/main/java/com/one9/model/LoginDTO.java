@@ -17,4 +17,9 @@ public class LoginDTO {
     @NotEmpty
     private String password;
 
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    private String type;
+
 }

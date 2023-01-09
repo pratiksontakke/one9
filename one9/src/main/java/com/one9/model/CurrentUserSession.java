@@ -24,10 +24,13 @@ public class CurrentUserSession {
 
     private LocalDateTime localDateTime;
 
-    public CurrentUserSession(String userId, String uuid, LocalDateTime localDateTime) {
+    private String type;
+
+    public CurrentUserSession(String userId, String uuid, LocalDateTime localDateTime, String type) {
         this.userId = userId;
         this.uuid = uuid;
         this.localDateTime = localDateTime;
+        this.type = type;
     }
 
     public CurrentUserSession(String uuid) {

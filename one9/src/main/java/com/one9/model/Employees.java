@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -66,15 +67,15 @@ public class Employees { // EmployeeID, LastName, FirstName, BirthDate, Photo, N
     private String email;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Set<Products> products;
+    private Set<Products> products = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Set<Shippers> shippers;
+    private Set<Shippers> shippers = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Set<Suppliers> suppliers;
+    private Set<Suppliers> suppliers = new HashSet<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Set<Categories> categories;
+    private Set<Categories> categories = new HashSet<>();
 
 }
