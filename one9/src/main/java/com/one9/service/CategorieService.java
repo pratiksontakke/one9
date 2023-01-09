@@ -10,9 +10,9 @@ public interface CategorieService {
 
     public Categories updateCategories(Categories categorie) throws CategorieException;
 
-    public Categories deleteCategories(Categories categorie) throws CategorieException;
+    public Categories deleteCategories(Integer id) throws CategorieException;
 
-    public Categories getCategorie(Integer cid) throws CategorieException;
+    public Categories getCategorie(Integer id) throws CategorieException;
 
     public List<Categories> getAllCategories() throws CategorieException;
 
