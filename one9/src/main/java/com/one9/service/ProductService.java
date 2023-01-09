@@ -10,7 +10,7 @@ public interface ProductService {
 
     public Products updateProducts(Products product) throws ProductException;
 
-    public Products deleteProducts(Products product) throws ProductException;
+    public Products deleteProducts(Integer id) throws ProductException;
 
     public Products getProduct(Integer id) throws ProductException;
 

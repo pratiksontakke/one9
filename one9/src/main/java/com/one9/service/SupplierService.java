@@ -11,7 +11,7 @@ public interface SupplierService {
 
     public Suppliers updateSupplier(Suppliers supplier) throws SupplierException;
 
-    public Suppliers deleteSupplier(Suppliers supplier) throws SupplierException;
+    public Suppliers deleteSupplier(Integer id) throws SupplierException;
 
     public Suppliers getSupplier(Integer id) throws SupplierException;
 
